@@ -1,0 +1,15 @@
+{% extends 'records/main.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ item_name }}</h1>
+        <ul>
+            {% for item in items %}
+                <li>{{ item.name }}</li>
+            {% empty %}
+                <li>No Items are found.</li>
+            {% endfor %}
+        </ul>
+        <a href="" class="create-button">Create</a>
+    </div>
+{% endblock %}

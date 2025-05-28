@@ -1,0 +1,79 @@
+{% extends 'records/main.html' %}
+
+{% block title %} Cashflow (1) Records {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Cashflow Records</h1>
+
+        <a href="{% url 'records-create' %}" class="create-button">Create</a>
+        <form method="get" style="margin-bottom: 2rem;">
+            <label>
+                Purpose:
+                <select name="purpose">
+                    <option value="">All</option>
+                    {% for p in purposes %}
+                        <option value="{{ p.id }}" {% if selected.purpose == p.id|stringformat:'s' %}selected{% endif %}>
+                            {{ p.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Category:
+                <select name="category">
+                    <option value="">All</option>
+                    {% for c in categories %}
+                        <option value="{{ c.id }}" {% if selected.category == c.id|stringformat:'s' %}selected{% endif %}>
+                            {{ c.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Subcategory:
+                <select name="subcategory">
+                    <option value="">All</option>
+                    {% for sc in subcategories %}
+                        <option value="{{ sc.id }}" {% if selected.subcategory == sc.id|stringformat:'s' %}selected{% endif %}>
+                            {{ sc.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <button type="submit">Filter</button>
+        </form>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Purpose</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Sum</th>
+                <th>Note</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for record in records %}
+                <tr class="{% if record.type.name == "Списание" %}red{% else %}green{% endif %}">
+                    <td>{{ record.created_at|date:"d.m.Y" }}</td>
+                    <td>{{ record.purpose }}</td>
+                    <td>{{ record.category }}</td>
+                    <td>{{ record.subcategory }}</td>
+                    <td>{{ record.sum }} ₽</td>
+                    <td class="note">{{ record.note|default:"—" }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7" style="text-align: center;">No records found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -22,8 +22,8 @@ urlpatterns = [
 
     path('subcategories/<int:category_id>', RecordSubCategoryListView.as_view(), name='subcategories'),
     path('subcategories/create/<int:category_id>', RecordSubCategoryCreateView.as_view(), name='subcategory-create'),
-    path('subcategories/delete/<int:pk>/', RecordSubCategoryDeleteView.as_view(), name='subcategory-delete'),
-    path('subcategories/update/<int:pk>/', RecordSubCategoryUpdateView.as_view(), name='subcategory-update'),
+    path('subcategories/delete/<int:category_id>/<int:pk>/', RecordSubCategoryDeleteView.as_view(), name='subcategory-delete'),
+    path('subcategories/update/<int:category_id>/<int:pk>/', RecordSubCategoryUpdateView.as_view(), name='subcategory-update'),
     path('ajax/load-subcategories/', load_subcategories, name='ajax_load_subcategories'),
 
     path('', RecordListView.as_view(), name='records'),

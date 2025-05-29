@@ -6,4 +6,4 @@ from records.models import Record
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ['purpose', 'type', 'subcategory', 'sum', 'note']
+        fields = ['purpose', 'type', 'category', 'subcategory', 'sum', 'note']

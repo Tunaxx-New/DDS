@@ -10,7 +10,7 @@
         {% csrf_token %}
         <p>Вы уверены, что хотите удалить "{{ object }}"?</p>
         <button type="submit">Удалить</button>
-        <a href="{% url reverse_lazy_name %}">Отмена</a>
+        <a href="{% if category %}{% url reverse_lazy_name category.id %}{% else %}{% url reverse_lazy_name %}{% endif %}">Отмена</a>
     </form>
 </div>
 {% endblock %}

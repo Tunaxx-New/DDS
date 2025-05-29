@@ -8,14 +8,22 @@
                 <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.25em 0; border-bottom: 1px solid #ddd;">
                     <span>{{ item.name }}</span>
                     <span>
-                        <a class="edit-button" href="{% url update_url_name item.pk %}"><i class="fas fa-edit"></i></a>
-                        <a class="delete-button" href="{% url delete_url_name item.pk %}"><i class="fas fa-trash-alt"></i></a>
+                        {% if model_name == 'Category' %}
+                            <a class="subcategories-button" href="{% url 'subcategories' item.pk %}">Subcategories</a>
+                        {% endif %}
+                        {% if item.category_id %}
+                            <a class="edit-button" href="{% url update_url_name item.category_id item.pk %}"><i class="fas fa-edit"></i></a>
+                            <a class="delete-button" href="{% url delete_url_name item.category_id item.pk %}"><i class="fas fa-trash-alt"></i></a>
+                        {% else %}
+                            <a class="edit-button" href="{% url update_url_name item.pk %}"><i class="fas fa-edit"></i></a>
+                            <a class="delete-button" href="{% url delete_url_name item.pk %}"><i class="fas fa-trash-alt"></i></a>
+                        {% endif %}
                     </span>
                 </li>
             {% empty %}
                 <li>No Items are found.</li>
             {% endfor %}
         </ul>
-        <a href="{% url create_url %}" class="create-button">Create</a>
+        <a href="{% if category %}{% url create_url category.id %}{% else %}{% url create_url %}{% endif %}" class="create-button">Create</a>
     </div>
 {% endblock %}

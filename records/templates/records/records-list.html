@@ -56,6 +56,7 @@
                 <th>Subcategory</th>
                 <th>Sum</th>
                 <th>Note</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -67,6 +68,14 @@
                     <td>{{ record.subcategory }}</td>
                     <td>{{ record.sum }} ₽</td>
                     <td class="note">{{ record.note|default:"—" }}</td>
+                    <td>
+                        <a class="edit-button" href="{% url 'records-update' record.pk %}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="delete-button" href="{% url 'records-delete' record.pk %}">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>

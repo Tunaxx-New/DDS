@@ -1,0 +1,49 @@
+{% extends 'records/main.html' %}
+
+{% block title %}Create Record{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>Create New Record</h1>
+
+        <form method="post">
+          {% csrf_token %}
+
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="error">{{ field.errors.as_text }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+          <button class="create-button" type="submit">Save</button>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $("#id_category").change(function(){
+                var url = "{% url 'ajax_load_subcategories' %}";
+                var categoryId = $(this).val();
+
+                $.ajax({
+                    url: url,
+                    data: {
+                        'category': categoryId
+                    },
+                    success: function(data){
+                        var select = $("#id_subcategory");
+                        select.empty();
+                        $.each(data, function(index, item){
+                            select.append('<option value="' + item.id + '">' + item.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+        </script>
+    </div>
+{% endblock %}

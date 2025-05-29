@@ -37,6 +37,44 @@ li {
     text-align: center;
 }
 
+.delete-button, .edit-button {
+    display: inline-flex;              /* Use flex to align icon + text */
+    align-items: center;               /* Vertically center contents */
+    padding: 0 12px;                   /* Left-right padding */
+    height: 32px;                     /* Fixed height for rectangle */
+    margin-left: 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    font-weight: 500;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #b02a37;
+}
+
+.edit-button {
+    background-color: #28a745;
+}
+
+.edit-button:hover {
+    background-color: #1e7e34;
+}
+
+/* Space between icon and text */
+.delete-button i,
+.edit-button i {
+    margin-right: 6px;
+    font-size: 1rem;
+}
+
 .nav-header {
     background-color: #2c3e50;
     padding: 10px 0;

@@ -19,6 +19,7 @@ class GenericModelListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['item_name'] = self.item_name
+        context['model_name'] = self.model_name
         context['create_url'] = f"{self.model_name.lower()}-create"
         context['delete_url_name'] = f"{self.model_name.lower()}-delete"
         context['update_url_name'] = f"{self.model_name.lower()}-update"
